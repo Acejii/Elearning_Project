@@ -1,0 +1,16 @@
+.authModal {
+  .ant-modal-mask {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    z-index: 1003;
+  }
+
+  .ant-modal-wrap {
+    overflow: hidden !important;
+  }
+
+  .ant-modal-content {
+    background: url("https://img.freepik.com/free-photo/green-leaves-white-background_53876-88575.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}

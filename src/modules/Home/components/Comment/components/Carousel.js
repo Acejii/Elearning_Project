@@ -15,6 +15,14 @@ const Carousel = () => {
   return (
     <div className="swiper__wrapper">
       <Swiper
+        breakpoints={{
+          1: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 3,
+          },
+        }}
         keyboard={{
           enabled: true,
         }}
@@ -115,7 +123,7 @@ const Carousel = () => {
               <p>
                 “Khoá học rất hữu ích, tài liệu học đầy đủ, kiến thức đào tạo
                 rất sát với thực tế khi đi làm. Giảng viên có kinh nghiệm và
-                chuyên môn cao, chỉ dẫn rất nhiệt tình, tận tâm và hiệu quả.”
+                chuyên môn cao.”
               </p>
             </div>
           </div>

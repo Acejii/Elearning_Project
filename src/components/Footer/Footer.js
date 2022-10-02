@@ -56,7 +56,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="col col-3">
+          <div className="col col-3 contact">
             <p className="title">Liên hệ</p>
             <a href="mailto:hoangthu7331@gmail.com" className="item">
               <div className="icon">

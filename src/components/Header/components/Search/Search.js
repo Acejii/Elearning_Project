@@ -20,7 +20,7 @@ const Search = () => {
   const { data: courses } = useRequest(() => courseAPI.getCourses());
 
   useEffect(() => {
-    if (value === "") {
+    if (!value.trim()) {
       setSearchCourses([]);
       return;
     }
@@ -39,6 +39,12 @@ const Search = () => {
     setShowResult(false);
   };
 
+  const handleChangeSearch = (e) => {
+    const searchValue = e.target.value;
+    if (!searchValue.startsWith(" ")) {
+      setValue(searchValue);
+    }
+  };
   return (
     <div className="header__search">
       <Tippy
@@ -53,7 +59,7 @@ const Search = () => {
             {...attrs}
             style={{ margin: 0 }}
           >
-            <SearchContent searchCourses={searchCourses} />
+            <SearchContent searchCourses={searchCourses} setValue={setValue} />
           </div>
         )}
       >
@@ -65,7 +71,7 @@ const Search = () => {
             placeholder="Hôm nay bạn muốn học gì..."
             spellCheck={false}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={handleChangeSearch}
             onFocus={() => setShowResult(true)}
           />
           {!!value && !isLoading && (

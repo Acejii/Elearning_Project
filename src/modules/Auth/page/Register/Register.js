@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Form, Input, Button, Spin, message } from "antd";
+import { Form, Input, Button, Spin } from "antd";
 import { useForm, Controller } from "react-hook-form";
 import { toast } from "react-toastify";
 import "./register.scss";
@@ -18,7 +18,7 @@ const Register = ({ setLogin }) => {
     { isManual: true }
   );
 
-  const { handleSubmit, control, setValue } = useForm({
+  const { handleSubmit, control } = useForm({
     defaultValues: {
       taiKhoan: "",
       matKhau: "",

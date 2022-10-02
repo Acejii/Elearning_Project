@@ -1,5 +1,9 @@
 @use "scss" as *;
 
+body.react-confirm-alert-body-element {
+  width: calc(100% - 17px);
+}
+
 .react-confirm-alert-body {
   text-align: center;
   background: $header-bg;

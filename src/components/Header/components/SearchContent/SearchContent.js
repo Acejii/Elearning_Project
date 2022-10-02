@@ -5,7 +5,7 @@ import defaultImg2 from "assets/images/defaultImg2.png";
 import defaultImg3 from "assets/images/defaultImg3.png";
 import defaultImg4 from "assets/images/defaultImg4.png";
 import defaultImg5 from "assets/images/defaultImg5.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const defaultImg = [
   defaultImg1,
@@ -15,15 +15,20 @@ const defaultImg = [
   defaultImg5,
 ];
 
-const SearchContent = ({ searchCourses }) => {
+const SearchContent = ({ searchCourses, setValue }) => {
+  const navigate = useNavigate();
+  const handleSearchCourse = (course) => {
+    navigate(`/courses/detail/${course?.maKhoaHoc}`, { state: course });
+    setValue("");
+  };
   return (
     <div className="header-search">
       <div className="wrapper">
         {searchCourses &&
           searchCourses.length > 0 &&
           searchCourses?.map((course, index) => (
-            <Link
-              to={`/courses/${course?.maKhoaHoc}`}
+            <div
+              onClick={() => handleSearchCourse(course)}
               key={index}
               className="row"
             >
@@ -47,7 +52,7 @@ const SearchContent = ({ searchCourses }) => {
                   <p className="teacher">{course?.nguoiTao.hoTen}</p>
                 </div>
               </div>
-            </Link>
+            </div>
           ))}
       </div>
     </div>

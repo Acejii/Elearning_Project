@@ -13,7 +13,7 @@ import "swiper/css/pagination";
 // Import file css cho carousel
 // import required modules
 import { Pagination, Autoplay, Keyboard } from "swiper";
-import CourseBreadcrumb from "modules/Courses/components/CourseBreadcrumb";
+import { useDispatch, useSelector } from "react-redux";
 import "./courseDetail.scss";
 import defaultImg1 from "assets/images/defaultImg1.png";
 import defaultImg2 from "assets/images/defaultImg2.png";
@@ -23,6 +23,12 @@ import defaultImg5 from "assets/images/defaultImg5.png";
 import useRequest from "hooks/useRequest";
 import courseAPI from "apis/courseAPI";
 import { useEffect } from "react";
+import { addCourses } from "components/Cart/slices/cartSlice";
+import confirm from "utils/confirmAlert";
+import { openAuthModal } from "modules/Auth/slices/authSlice";
+import { toast } from "react-toastify";
+import toastMessage from "components/Toast/toastMessage";
+import axios from "axios";
 
 const defaultImg = [
   defaultImg1,
@@ -33,17 +39,54 @@ const defaultImg = [
 ];
 const CourseDetail = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const { state: course } = useLocation();
   const categoryId = course?.danhMucKhoaHoc?.maDanhMucKhoahoc;
-  const { data: courses, isLoading } = useRequest(
+  const { data: courses, isLoading: courseLoading } = useRequest(
     () => courseAPI.getCoursesByCategory(categoryId),
     { deps: [course] }
+  );
+
+  const { data: handleRegisterCourse, isLoading } = useRequest(
+    (value) => courseAPI.registerCourse(value),
+    { isManual: true }
   );
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [course]);
+
+  const handleClickRegister = () => {
+    if (user) {
+      confirm(
+        "Ghi danh",
+        "Bạn có chắc chắn muốn ghi danh khoá học?",
+        async () => {
+          const value = {
+            maKhoaHoc: course?.maKhoaHoc,
+            taiKhoan: user?.taiKhoan,
+          };
+          try {
+            await handleRegisterCourse(value);
+            toast.success(
+              toastMessage(
+                "Ghi danh thành công",
+                "Bạn có thể xem các khoá học đã đăng ký ở Trang cá nhân"
+              )
+            );
+          } catch (error) {
+            toast.error(toastMessage("Ghi danh thất bại", error));
+          }
+        }
+      );
+    }
+    if (!user) {
+      confirm("Bạn chưa đăng nhập", "Đăng nhập để đăng ký khoá học?", () => {
+        dispatch(openAuthModal());
+      });
+    }
+  };
 
   return (
     <>
@@ -105,10 +148,16 @@ const CourseDetail = () => {
                 </div>
 
                 <div className="footer-btn">
-                  <button className="btn btn-primary register-btn">
+                  <button
+                    className="btn btn-primary register-btn"
+                    onClick={handleClickRegister}
+                  >
                     Ghi danh
                   </button>
-                  <button className="btn btn-secondary cart-add-btn">
+                  <button
+                    className="btn btn-secondary cart-add-btn"
+                    onClick={() => dispatch(addCourses(course))}
+                  >
                     Thêm vào giỏ hàng
                   </button>
                 </div>
@@ -170,6 +219,21 @@ const CourseDetail = () => {
 
               <div className="inner">
                 <Swiper
+                  breakpoints={{
+                    0: {
+                      slidesPerView: 1,
+                    },
+
+                    576: {
+                      slidesPerView: 3,
+                    },
+                    768: {
+                      slidesPerView: 4,
+                    },
+                    992: {
+                      slidesPerView: 5,
+                    },
+                  }}
                   keyboard={{
                     enabled: true,
                   }}

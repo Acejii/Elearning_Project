@@ -1,0 +1,43 @@
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 992px) {
+  .course-detail .wrapper .main .content .footer-btn {
+    display: flex;
+  }
+
+  .course-detail .wrapper .course-info .course-bg {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .course-detail .wrapper .breadcrumb {
+    padding: 10px 24px;
+  }
+
+  .course-detail .wrapper .main .image {
+    height: 165px;
+  }
+
+  .course-detail .wrapper .main {
+    padding: 50px 24px;
+  }
+
+  .course-detail .wrapper .main .content .item .name {
+    font-size: 1.3rem;
+  }
+
+  .course-detail .wrapper .main .content .footer-btn .register-btn {
+    width: 120px;
+  }
+
+  .course-detail .statis .left,
+  .course-detail .statis .right {
+    font-size: 0.75rem !important;
+  }
+
+  .course-detail .wrapper .related-course .item .content {
+    height: 225px;
+  }
+}
+@media screen and (max-width: 576px) {
+}

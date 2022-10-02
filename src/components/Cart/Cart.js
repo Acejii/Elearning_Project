@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Badge from "@mui/material/Badge";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { ImBin } from "react-icons/im";
@@ -35,6 +35,7 @@ const defaultImg = [
 
 const Cart = () => {
   const { cart, isOpen } = useSelector((state) => state.cart);
+  const [cartWidth, setCartWidth] = useState("600px");
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
@@ -42,6 +43,14 @@ const Cart = () => {
     (value) => courseAPI.registerCourse(value),
     { isManual: true }
   );
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setCartWidth("100%");
+    } else {
+      setCartWidth("600px");
+    }
+  }, []);
 
   const onClose = () => {
     dispatch(closeCart());
@@ -173,7 +182,7 @@ const Cart = () => {
       {/* Modal */}
 
       <Drawer
-        width={600}
+        width={cartWidth}
         title="Giỏ hàng"
         placement="right"
         onClose={onClose}

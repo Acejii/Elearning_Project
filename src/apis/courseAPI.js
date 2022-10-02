@@ -8,7 +8,7 @@ const courseAPI = {
   getCourses: (courseName) => {
     return axiosClient.get("QuanLyKhoaHoc/LayDanhSachKhoaHoc", {
       params: {
-        maNhom: "GP01",
+        MaNhom: "GP01",
         tenKhoaHoc: courseName,
       },
     });
@@ -25,6 +25,42 @@ const courseAPI = {
 
   registerCourse: (value) => {
     return axiosClient.post("QuanLyKhoaHoc/DangKyKhoaHoc", value);
+  },
+
+  getCourseStudents: (courseId) => {
+    return axiosClient.get("QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc", {
+      params: {
+        maKhoaHoc: courseId,
+      },
+    });
+  },
+
+  getCourseInfo: (courseId) => {
+    return axiosClient.get("QuanLyKhoaHoc/LayThongTinKhoaHoc", {
+      params: {
+        maKhoaHoc: courseId,
+      },
+    });
+  },
+
+  CancelRegisterCourse: (value) => {
+    return axiosClient.post("QuanLyKhoaHoc/HuyGhiDanh", value);
+  },
+
+  removeCourse: (courseId) => {
+    return axiosClient.delete("QuanLyKhoaHoc/XoaKhoaHoc", {
+      params: {
+        MaKhoaHoc: courseId,
+      },
+    });
+  },
+
+  addCourse: (course) => {
+    return axiosClient.post("QuanLyKhoaHoc/ThemKhoaHoc", course);
+  },
+
+  updateCourse: (course) => {
+    return axiosClient.put("QuanLyKhoaHoc/CapNhatKhoaHoc", course);
   },
 };
 

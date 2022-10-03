@@ -5,7 +5,7 @@ import defaultImg2 from "assets/images/defaultImg2.png";
 import defaultImg3 from "assets/images/defaultImg3.png";
 import defaultImg4 from "assets/images/defaultImg4.png";
 import defaultImg5 from "assets/images/defaultImg5.png";
-import { Empty } from "antd";
+import { Empty, Skeleton } from "antd";
 import { toast } from "react-toastify";
 import toastMessage from "components/Toast/toastMessage";
 import courseAPI from "apis/courseAPI";
@@ -64,42 +64,46 @@ const CourseInfo = () => {
 
   return (
     <div className="course__info">
-      <div className="course__info__wrapper">
-        {courses && courses.length > 0 ? (
-          courses?.map((course, index) => (
-            <div key={index} className="col col-2">
-              <div className="item">
-                <div className="image">
-                  <img
-                    src={course.hinhAnh}
-                    alt="courseImg"
-                    onError={(event) => {
-                      event.target.src =
-                        defaultImg[Math.floor(Math.random() * 5)];
-                      event.onerror = null;
-                    }}
-                  />
-                </div>
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <div className="course__info__wrapper">
+          {courses && courses.length > 0 ? (
+            courses?.map((course, index) => (
+              <div key={index} className="col col-2">
+                <div className="item">
+                  <div className="image">
+                    <img
+                      src={course.hinhAnh}
+                      alt="courseImg"
+                      onError={(event) => {
+                        event.target.src =
+                          defaultImg[Math.floor(Math.random() * 5)];
+                        event.onerror = null;
+                      }}
+                    />
+                  </div>
 
-                <div className="main">
-                  <p className="name">{course?.tenKhoaHoc}</p>
-                  <StudenCount courseId={course?.maKhoaHoc} />
+                  <div className="main">
+                    <p className="name">{course?.tenKhoaHoc}</p>
+                    <StudenCount courseId={course?.maKhoaHoc} />
+                  </div>
+                  <button
+                    className="register-cancel-btn"
+                    onClick={() => handleCancelCourse(course?.maKhoaHoc)}
+                  >
+                    Huỷ ghi danh
+                  </button>
                 </div>
-                <button
-                  className="register-cancel-btn"
-                  onClick={() => handleCancelCourse(course?.maKhoaHoc)}
-                >
-                  Huỷ ghi danh
-                </button>
               </div>
+            ))
+          ) : (
+            <div style={{ width: "100%", textAlign: "center" }}>
+              <Empty description="Bạn chưa đăng ký khoá học nào!" />
             </div>
-          ))
-        ) : (
-          <div style={{ width: "100%", textAlign: "center" }}>
-            <Empty description="Bạn chưa đăng ký khoá học nào!" />
-          </div>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 };

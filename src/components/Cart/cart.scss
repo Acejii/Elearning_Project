@@ -4,6 +4,7 @@
   .ant-drawer-title {
     text-align: center;
     font-size: 1.5rem;
+    position: relative;
   }
 
   .image {
@@ -20,7 +21,7 @@
   }
 
   .cart-table {
-    height: 430px;
+    height: calc(100vh - 200px);
     overflow: auto;
   }
 
@@ -34,6 +35,9 @@
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
   }
 
   .delete-btn {

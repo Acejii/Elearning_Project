@@ -25,10 +25,10 @@
 }
 
 .menu__box {
-  padding-left: 32px;
   .avatar {
     display: flex;
     align-items: center;
+    padding-left: 28px;
 
     &:hover {
       cursor: pointer;
@@ -67,10 +67,12 @@
     .item {
       display: flex;
       align-items: center;
-      padding: 8px;
+      padding: 8px 0px 8px 28px;
+      color: $txt-color;
+      border-radius: 15px;
       &:hover {
+        background: $main-color;
         cursor: pointer;
-        opacity: 0.8;
       }
 
       .icon {
@@ -81,7 +83,7 @@
       }
 
       .main {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 500;
         margin-left: 12px;
       }

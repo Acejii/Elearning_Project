@@ -11,6 +11,7 @@ import fullstackImg from "assets/images/fullstack-img.jpg";
 import mindImg from "assets/images/mind-img.jpg";
 import useRequest from "hooks/useRequest";
 import courseAPI from "apis/courseAPI";
+import { Skeleton } from "antd";
 
 const backgroundImg = [
   backendImg,
@@ -22,7 +23,9 @@ const backgroundImg = [
 ];
 
 const CourseBanner = ({ category, title, background }) => {
-  const { data: categories } = useRequest(() => courseAPI.getCategory());
+  const { data: categories, isLoading } = useRequest(() =>
+    courseAPI.getCategory()
+  );
 
   const newCategories = categories?.map((category, index) => {
     return { ...category, background: backgroundImg[index] };
@@ -34,25 +37,31 @@ const CourseBanner = ({ category, title, background }) => {
 
   return (
     <div className="course__banner">
-      <div className="image">
-        <img
-          src={background ? background : categoryItem?.background}
-          alt="photo"
-        />
-      </div>
-      <div className="course__main">
-        <p className="title">{`Khoá học ${
-          title ? title : categoryItem?.tenDanhMuc
-        } Online`}</p>
-        <p className="description">
-          {`Tìm kiếm những điều thú vị trong Khoá học ${
-            title ? title : categoryItem?.tenDanhMuc
-          }`}
-        </p>
-        <button className="btn btn-primary course-btn">
-          Khám phá ngay nào
-        </button>
-      </div>
+      {isLoading ? (
+        <Skeleton />
+      ) : (
+        <>
+          <div className="image">
+            <img
+              src={background ? background : categoryItem?.background}
+              alt="photo"
+            />
+          </div>
+          <div className="course__main">
+            <p className="title">{`Khoá học ${
+              title ? title : categoryItem?.tenDanhMuc
+            } Online`}</p>
+            <p className="description">
+              {`Tìm kiếm những điều thú vị trong Khoá học ${
+                title ? title : categoryItem?.tenDanhMuc
+              }`}
+            </p>
+            <button className="btn btn-primary course-btn">
+              Khám phá ngay nào
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 };

@@ -23,6 +23,12 @@ const AdminLayout = () => {
   }, []);
 
   if (!user || user?.maLoaiNguoiDung !== "GV") {
+    toast.warning(
+      toastMessage(
+        "Truy cập thất bại",
+        "Bạn không có quyền truy cập vào hệ thống Quản trị"
+      )
+    );
     return <Navigate to="/" />;
   }
 

@@ -107,6 +107,7 @@ const Cart = () => {
             <button
               onClick={() => handleRemove(record?.maKhoaHoc)}
               style={{ backgroundColor: "transparent", cursor: "pointer" }}
+              className="cart-delete-btn"
             >
               <ImBin size="18px" color="red" />
             </button>

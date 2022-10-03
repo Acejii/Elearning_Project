@@ -153,7 +153,7 @@ const CourseItem = ({ courses, all, showmore, filter, courseshowing }) => {
                 </div>
                 <p className="mid">{course?.moTa}</p>
                 <div className="foot">
-                  <p className="author">{`Bởi ${course?.nguoiTao?.hoTen}`}</p>
+                  <p className="author">{`Bởi ${course?.nguoiTao?.taiKhoan}`}</p>
                   <div
                     className="cart"
                     onClick={() => dispatch(addCourses(course))}

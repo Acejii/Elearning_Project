@@ -21,12 +21,12 @@ const Banner = () => {
         </p>
         <div className="button">
           <button
-            className="btn btn-secondary"
+            className="btn btn-secondary banner-course-btn"
             onClick={() => navigate("/courses")}
           >
             Khám phá khoá học
           </button>
-          <a href="tel:+8499999999">
+          <a href="tel:+8499999999" className="banner-contact-btn">
             <button className="btn btn-primary">Liên hệ với chúng tôi</button>
           </a>
         </div>

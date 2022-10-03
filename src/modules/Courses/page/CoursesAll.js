@@ -6,6 +6,7 @@ import CourseItem from "modules/Home/components/CourseShowing/components/CourseI
 
 import "./courses.scss";
 import allcourseImg from "assets/images/allcourse-img.jpg";
+import LoadingPage from "components/LoadingPage";
 
 const status = ["mới", "bán chạy"];
 

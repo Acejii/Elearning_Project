@@ -74,7 +74,7 @@ const Footer = () => {
               <div className="icon">
                 <GoLocation />
               </div>
-              <div className="content">Lê Đức Thọ, Quận Gò Vấp</div>
+              <div className="content">Lê Đức Thọ, Gò Vấp</div>
             </div>
           </div>
         </div>

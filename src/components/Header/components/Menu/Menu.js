@@ -126,14 +126,16 @@ const Menu = () => {
               </div>
               <div className="main">Quyền quản trị</div>
             </div>
-            <div className="item">
-              <div className="icon">
-                <MdLogout />
+            {user && (
+              <div className="item">
+                <div className="icon">
+                  <MdLogout />
+                </div>
+                <div className="main" onClick={handleLogout}>
+                  Đăng xuất
+                </div>
               </div>
-              <div className="main" onClick={handleLogout}>
-                Đăng xuất
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </Drawer>

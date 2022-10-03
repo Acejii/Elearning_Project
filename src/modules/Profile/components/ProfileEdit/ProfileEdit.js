@@ -9,7 +9,7 @@ import authAPI from "apis/authAPI";
 import confirm from "utils/confirmAlert";
 import { BiEdit, BiShow, BiHide } from "react-icons/bi";
 import "./profileEdit.scss";
-import { logout } from "modules/Auth/slices/authSlice";
+import { logout, openAuthModal } from "modules/Auth/slices/authSlice";
 
 const ProfileEdit = ({ user, onReload }) => {
   const [modalOpen, SetModalOpen] = useState(false);
@@ -85,6 +85,7 @@ const ModalContent = ({ user, SetModalOpen, onReload }) => {
           SetModalOpen(false);
           onReload();
           dispatch(logout());
+          dispatch(openAuthModal());
         } catch (error) {
           toast.error(toastMessage("Cập nhật thất bại", error));
         }

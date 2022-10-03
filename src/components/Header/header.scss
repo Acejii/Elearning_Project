@@ -210,15 +210,11 @@
   }
 }
 
-.search-responsive-box {
-  padding: 5px;
-  background: $header-bg;
-}
-
 .footer__header {
+  height: 50px;
   background: $header-bg;
   box-shadow: $box-shadow;
-  padding: 6px 24px;
+  // padding: 6px 24px;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -227,6 +223,7 @@
   display: none;
 
   .wrapper {
+    height: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;

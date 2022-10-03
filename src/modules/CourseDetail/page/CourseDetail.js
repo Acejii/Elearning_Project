@@ -28,7 +28,7 @@ import confirm from "utils/confirmAlert";
 import { openAuthModal } from "modules/Auth/slices/authSlice";
 import { toast } from "react-toastify";
 import toastMessage from "components/Toast/toastMessage";
-import axios from "axios";
+import LoadingPage from "components/LoadingPage";
 
 const defaultImg = [
   defaultImg1,
@@ -43,12 +43,12 @@ const CourseDetail = () => {
   const { user } = useSelector((state) => state.auth);
   const { state: course } = useLocation();
   const categoryId = course?.danhMucKhoaHoc?.maDanhMucKhoahoc;
-  const { data: courses, isLoading: courseLoading } = useRequest(
+  const { data: courses, isLoading: isLoading } = useRequest(
     () => courseAPI.getCoursesByCategory(categoryId),
     { deps: [course] }
   );
 
-  const { data: handleRegisterCourse, isLoading } = useRequest(
+  const { data: handleRegisterCourse } = useRequest(
     (value) => courseAPI.registerCourse(value),
     { isManual: true }
   );
@@ -90,241 +90,231 @@ const CourseDetail = () => {
 
   return (
     <>
-      {isLoading ? (
-        <p>Hello</p>
-      ) : (
-        <div className="course-detail">
-          <div className="wrapper container">
-            <div className="breadcrumb">
-              <Breadcrumb>
-                <Breadcrumb.Item>
-                  <Link to="/" className="course-url">
-                    Trang chủ
-                  </Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                  <Link to="/courses/" className="course-url">
-                    Các khoá học
-                  </Link>
-                </Breadcrumb.Item>
+      <div className="course-detail">
+        <div className="wrapper container">
+          <div className="breadcrumb">
+            <Breadcrumb>
+              <Breadcrumb.Item>
+                <Link to="/" className="course-url">
+                  Trang chủ
+                </Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Link to="/courses/" className="course-url">
+                  Các khoá học
+                </Link>
+              </Breadcrumb.Item>
 
-                <Breadcrumb.Item>
-                  <p className="course-url">{course?.tenKhoaHoc}</p>
-                </Breadcrumb.Item>
-              </Breadcrumb>
+              <Breadcrumb.Item>
+                <p className="course-url">{course?.tenKhoaHoc}</p>
+              </Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
+
+          <div className="main">
+            <div className="image">
+              <img
+                src={course?.hinhAnh}
+                alt="hinhAnh"
+                onError={(event) => {
+                  event.target.src = defaultImg[Math.floor(Math.random() * 5)];
+                  event.onerror = null;
+                }}
+              />
             </div>
 
-            <div className="main">
-              <div className="image">
-                <img
-                  src={course?.hinhAnh}
-                  alt="hinhAnh"
-                  onError={(event) => {
-                    event.target.src =
-                      defaultImg[Math.floor(Math.random() * 5)];
-                    event.onerror = null;
-                  }}
-                />
-              </div>
-
-              <div className="content">
-                <div className="item">
-                  <div className="name">
-                    <p>{course?.tenKhoaHoc}</p>
-                  </div>
-
-                  <div className="author">
-                    <div className="avatar">
-                      <img
-                        src="https://nld.mediacdn.vn/sKb9EZSQLZblqgVZUilshbE7HvXloc/Image/2012/11/1_6c107.jpg"
-                        alt="avatar"
-                      />
-                    </div>
-
-                    <div className="author-name">
-                      <p>{`${course?.nguoiTao?.hoTen} - ${course?.nguoiTao?.tenLoaiNguoiDung}`}</p>
-                    </div>
-                  </div>
+            <div className="content">
+              <div className="item">
+                <div className="name">
+                  <p>{course?.tenKhoaHoc}</p>
                 </div>
 
-                <div className="footer-btn">
-                  <button
-                    className="btn btn-primary register-btn"
-                    onClick={handleClickRegister}
-                  >
-                    Ghi danh
-                  </button>
-                  <button
-                    className="btn btn-secondary cart-add-btn"
-                    onClick={() => dispatch(addCourses(course))}
-                  >
-                    Thêm vào giỏ hàng
-                  </button>
-                </div>
-              </div>
-            </div>
+                <div className="author">
+                  <div className="avatar">
+                    <img
+                      src="https://nld.mediacdn.vn/sKb9EZSQLZblqgVZUilshbE7HvXloc/Image/2012/11/1_6c107.jpg"
+                      alt="avatar"
+                    />
+                  </div>
 
-            <div className="course-info">
-              <div className="course-bg">
-                <div className="title">
-                  <p>Chi tiết khoá học</p>
-                </div>
-
-                <div className="info">
-                  <div className="info-item desciption">
-                    <div className="inner">
-                      <p>{course?.moTa}</p>
-                    </div>
-                  </div>
-                  <div className="info-item">
-                    <div className="label">
-                      <p>Người tạo:</p>
-                    </div>
-                    <div className="inner">
-                      <p>{`${course?.nguoiTao?.hoTen} - ${course?.nguoiTao?.tenLoaiNguoiDung}`}</p>
-                    </div>
-                  </div>
-                  <div className="info-item">
-                    <div className="label">
-                      <p>Ngày tạo:</p>
-                    </div>
-                    <div className="inner">
-                      <p>{course?.ngayTao}</p>
-                    </div>
-                  </div>
-                  <div className="info-item">
-                    <div className="label">
-                      <p>Lượt xem:</p>
-                    </div>
-                    <div className="inner">
-                      <p>{`${course?.luotXem} lượt xem`}</p>
-                    </div>
-                  </div>
-                  <div className="info-item">
-                    <div className="label">
-                      <p>Số lượng học viên:</p>
-                    </div>
-                    <div className="inner">
-                      <p>{`${Math.floor(Math.random() * 3000)} người`}</p>
-                    </div>
+                  <div className="author-name">
+                    <p>{`${course?.nguoiTao?.hoTen} - ${course?.nguoiTao?.tenLoaiNguoiDung}`}</p>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div className="related-course">
-              <div className="title">
-                <p>Khoá học liên quan</p>
-              </div>
-
-              <div className="inner">
-                <Swiper
-                  breakpoints={{
-                    0: {
-                      slidesPerView: 1,
-                    },
-
-                    576: {
-                      slidesPerView: 3,
-                    },
-                    768: {
-                      slidesPerView: 4,
-                    },
-                    992: {
-                      slidesPerView: 5,
-                    },
-                  }}
-                  keyboard={{
-                    enabled: true,
-                  }}
-                  speed={1000}
-                  autoplay={{
-                    delay: 4000,
-                    disableOnInteraction: false,
-                  }}
-                  slidesPerView={5}
-                  slidesPerGroupSkip={1}
-                  spaceBetween={10}
-                  loop={true}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  modules={[Pagination, Autoplay, Keyboard]}
-                  className="mySwiper"
+              <div className="footer-btn">
+                <button
+                  className="btn btn-primary register-btn"
+                  onClick={handleClickRegister}
                 >
-                  {courses?.map((course, index) => (
-                    <SwiperSlide key={index}>
-                      <div className="item">
-                        <div
-                          className="image"
-                          onClick={() =>
-                            navigate(`/courses/detail/${course.maKhoaHoc}`, {
-                              state: course,
-                            })
-                          }
-                        >
-                          <img
-                            className="img"
-                            src={course?.hinhAnh}
-                            alt="Anh"
-                            onError={(event) => {
-                              event.target.src =
-                                defaultImg[Math.floor(Math.random() * 5)];
-                              event.onerror = null;
-                            }}
-                          />
-                        </div>
-
-                        <div className="content">
-                          <div className="head">
-                            <div className="statis">
-                              <Tooltip title="Người xem" placement="topLeft">
-                                <div className="left">
-                                  <div className="icon">
-                                    <AiOutlineEye />
-                                  </div>
-                                  <span>{course?.luotXem}</span>
-                                </div>
-                              </Tooltip>
-                              <Tooltip title="Ngày tạo" placement="topRight">
-                                <div className="right">
-                                  <div className="icon">
-                                    <GoCalendar />
-                                  </div>
-                                  <span>{course?.ngayTao}</span>
-                                </div>
-                              </Tooltip>
-                            </div>
-                            <span
-                              className="item-title"
-                              onClick={() =>
-                                navigate(
-                                  `/courses/detail/${course.maKhoaHoc}`,
-                                  {
-                                    state: course,
-                                  }
-                                )
-                              }
-                            >
-                              <span className="value">
-                                {course?.tenKhoaHoc}
-                              </span>
-                            </span>
-                          </div>
-                          <p className="mid">{course?.moTa}</p>
-                          <div className="foot">
-                            <p className="author">{`Bởi ${course?.nguoiTao?.hoTen}`}</p>
-                          </div>
-                        </div>
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                  Ghi danh
+                </button>
+                <button
+                  className="btn btn-secondary cart-add-btn"
+                  onClick={() => dispatch(addCourses(course))}
+                >
+                  Thêm giỏ hàng
+                </button>
               </div>
             </div>
           </div>
+
+          <div className="course-info">
+            <div className="course-bg">
+              <div className="title">
+                <p>Chi tiết khoá học</p>
+              </div>
+
+              <div className="info">
+                <div className="info-item desciption">
+                  <div className="inner">
+                    <p>{course?.moTa}</p>
+                  </div>
+                </div>
+                <div className="info-item">
+                  <div className="label">
+                    <p>Người tạo:</p>
+                  </div>
+                  <div className="inner">
+                    <p>{`${course?.nguoiTao?.hoTen} - ${course?.nguoiTao?.tenLoaiNguoiDung}`}</p>
+                  </div>
+                </div>
+                <div className="info-item">
+                  <div className="label">
+                    <p>Ngày tạo:</p>
+                  </div>
+                  <div className="inner">
+                    <p>{course?.ngayTao}</p>
+                  </div>
+                </div>
+                <div className="info-item">
+                  <div className="label">
+                    <p>Lượt xem:</p>
+                  </div>
+                  <div className="inner">
+                    <p>{`${course?.luotXem} lượt xem`}</p>
+                  </div>
+                </div>
+                <div className="info-item">
+                  <div className="label">
+                    <p>Số lượng học viên:</p>
+                  </div>
+                  <div className="inner">
+                    <p>{`${Math.floor(Math.random() * 3000)} người`}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="related-course">
+            <div className="title">
+              <p>Khoá học liên quan</p>
+            </div>
+
+            <div className="inner">
+              <Swiper
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1.5,
+                  },
+
+                  576: {
+                    slidesPerView: 2.5,
+                  },
+                  768: {
+                    slidesPerView: 3.5,
+                  },
+                  992: {
+                    slidesPerView: 4.5,
+                  },
+                }}
+                keyboard={{
+                  enabled: true,
+                }}
+                speed={1000}
+                autoplay={{
+                  delay: 4000,
+                  disableOnInteraction: false,
+                }}
+                slidesPerView={5}
+                slidesPerGroupSkip={1}
+                spaceBetween={10}
+                loop={true}
+                pagination={{
+                  clickable: true,
+                }}
+                modules={[Pagination, Autoplay, Keyboard]}
+                className="mySwiper"
+              >
+                {courses?.map((course, index) => (
+                  <SwiperSlide key={index}>
+                    <div className="item">
+                      <div
+                        className="image"
+                        onClick={() =>
+                          navigate(`/courses/detail/${course.maKhoaHoc}`, {
+                            state: course,
+                          })
+                        }
+                      >
+                        <img
+                          className="img"
+                          src={course?.hinhAnh}
+                          alt="Anh"
+                          onError={(event) => {
+                            event.target.src =
+                              defaultImg[Math.floor(Math.random() * 5)];
+                            event.onerror = null;
+                          }}
+                        />
+                      </div>
+
+                      <div className="content">
+                        <div className="head">
+                          <div className="statis">
+                            <Tooltip title="Người xem" placement="topLeft">
+                              <div className="left">
+                                <div className="icon">
+                                  <AiOutlineEye />
+                                </div>
+                                <span>{course?.luotXem}</span>
+                              </div>
+                            </Tooltip>
+                            <Tooltip title="Ngày tạo" placement="topRight">
+                              <div className="right">
+                                <div className="icon">
+                                  <GoCalendar />
+                                </div>
+                                <span>{course?.ngayTao}</span>
+                              </div>
+                            </Tooltip>
+                          </div>
+                          <span
+                            className="item-title"
+                            onClick={() =>
+                              navigate(`/courses/detail/${course.maKhoaHoc}`, {
+                                state: course,
+                              })
+                            }
+                          >
+                            <span className="value">{course?.tenKhoaHoc}</span>
+                          </span>
+                        </div>
+                        <p className="mid">{course?.moTa}</p>
+                        <div className="foot">
+                          <p className="author">{`Bởi ${course?.nguoiTao?.hoTen}`}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
         </div>
-      )}
+      </div>
     </>
   );
 };

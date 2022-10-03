@@ -3,19 +3,18 @@ import { NavLink, Link, useNavigate } from "react-router-dom";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Dropdown } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { BsSearch } from "react-icons/bs";
 import { AiTwotoneHome } from "react-icons/ai";
 import { openAuthModal } from "modules/Auth/slices/authSlice";
 import { FaUserPlus } from "react-icons/fa";
 import AuthModal from "modules/Auth/components/AuthModal";
 import OverlayContent from "./components/OverlayContent";
-import Tippy from "@tippyjs/react/headless";
 import logo from "../../assets/images/logo.png";
 import avatar from "assets/images/user-avatar.jpg";
 import "./header.scss";
 import Search from "./components/Search";
 import Cart from "components/Cart";
 import Menu from "./components/Menu";
+import MobileSearch from "./components/MobileSearch";
 
 const Header = () => {
   const [isLogin, setLogin] = useState(false);
@@ -106,26 +105,7 @@ const Header = () => {
               <Search />
             </div>
             <div className="search-responsive">
-              {" "}
-              <Tippy
-                trigger="click"
-                placement="bottom"
-                interactive
-                arrow={true}
-                render={(attrs) => (
-                  <div
-                    className="search-responsive-box"
-                    tabIndex="-1"
-                    {...attrs}
-                  >
-                    <Search />
-                  </div>
-                )}
-              >
-                <div className="search-responsive-icon">
-                  <BsSearch />
-                </div>
-              </Tippy>
+              <MobileSearch />
             </div>
 
             {/* cart */}

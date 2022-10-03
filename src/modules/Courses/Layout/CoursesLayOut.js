@@ -4,7 +4,6 @@ import CourseBreadcrumb from "../components/CourseBreadcrumb";
 import { NavLink } from "react-router-dom";
 import useRequest from "hooks/useRequest";
 import courseAPI from "apis/courseAPI";
-import LoadingPage from "components/LoadingPage";
 
 const CoursesLayOut = () => {
   const { data: categories, isLoading } = useRequest(() =>

@@ -28,7 +28,6 @@ import confirm from "utils/confirmAlert";
 import { openAuthModal } from "modules/Auth/slices/authSlice";
 import { toast } from "react-toastify";
 import toastMessage from "components/Toast/toastMessage";
-import LoadingPage from "components/LoadingPage";
 
 const defaultImg = [
   defaultImg1,

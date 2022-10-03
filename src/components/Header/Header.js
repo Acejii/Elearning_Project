@@ -30,8 +30,9 @@ const Header = () => {
     const handleScroll = () => {
       let currentScrollPos = window.pageYOffset;
       if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
+        (document.body.scrollTop > 80 ||
+          document.documentElement.scrollTop > 80) &&
+        window.innerWidth > 769
       ) {
         if (prevScrollpos > currentScrollPos) {
           header.classList.remove("hide");

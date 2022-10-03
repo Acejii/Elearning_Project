@@ -63,15 +63,15 @@
     font-size: 14px !important;
   }
 
-  .footer__header {
-    display: block;
-  }
-
-  .header.hide {
+  .header {
     transform: translateY(0);
     opacity: 1;
     visibility: visible;
     overflow: visible;
+  }
+
+  .footer__header {
+    display: block;
   }
 
   .header .header-wrapper .logo img {

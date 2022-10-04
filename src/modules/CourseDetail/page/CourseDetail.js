@@ -42,7 +42,7 @@ const CourseDetail = () => {
   const { user } = useSelector((state) => state.auth);
   const { state: course } = useLocation();
   const categoryId = course?.danhMucKhoaHoc?.maDanhMucKhoahoc;
-  const { data: courses, isLoading: isLoading } = useRequest(
+  const { data: courses } = useRequest(
     () => courseAPI.getCoursesByCategory(categoryId),
     { deps: [course] }
   );

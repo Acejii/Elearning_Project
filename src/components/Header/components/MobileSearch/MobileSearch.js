@@ -4,12 +4,25 @@ import { BsSearch } from "react-icons/bs";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import "./mobileSearch.scss";
 import Search from "../Search";
+import { useRef } from "react";
 
 const MobileSearch = () => {
+  const resInputRef = useRef(null);
   const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleOpenChange = (open) => {
+    if (open === true) {
+      resInputRef.current.focus();
+    }
+  };
+
   return (
     <>
-      <div className="search-responsive-icon" onClick={() => setOpen(true)}>
+      <div className="search-responsive-icon" onClick={handleOpen}>
         <BsSearch />
       </div>
       <Drawer
@@ -18,13 +31,15 @@ const MobileSearch = () => {
         closable={false}
         onClose={() => setOpen(false)}
         open={open}
+        autoFocus={true}
+        afterOpenChange={handleOpenChange}
         className="searchs-responsive-drawer"
       >
         <div className="search-box">
           <div className="back-icon" onClick={() => setOpen(false)}>
             <IoMdArrowRoundBack />
           </div>
-          <Search />
+          <Search resInputRef={resInputRef} />
         </div>
       </Drawer>
     </>

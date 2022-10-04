@@ -9,8 +9,8 @@ import Tippy from "@tippyjs/react/headless";
 
 import "./search.scss";
 
-const Search = () => {
-  const inputRef = useRef();
+const Search = ({ resInputRef }) => {
+  const inputRef = useRef(null);
 
   const [showResult, setShowResult] = useState(true);
   const [searchCourses, setSearchCourses] = useState([]);
@@ -66,7 +66,8 @@ const Search = () => {
         <div className="search">
           <SearchIcon className={`search-icon ${value ? "appear" : ""}`} />
           <input
-            ref={inputRef}
+            id="search-input"
+            ref={resInputRef ? resInputRef : inputRef}
             type="text"
             placeholder="Hôm nay bạn muốn học gì..."
             spellCheck={false}
@@ -80,7 +81,9 @@ const Search = () => {
               fontSize="inherit"
               onClick={() => {
                 setValue("");
-                inputRef.current.focus();
+                resInputRef
+                  ? resInputRef.current.focus()
+                  : inputRef.current.focus();
               }}
             />
           )}

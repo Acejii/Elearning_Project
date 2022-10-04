@@ -33,7 +33,7 @@ const Search = () => {
       setLoading(false);
     }, 1000);
     return () => clearTimeout(timeoutId);
-  }, [value]);
+  }, [value, courses]);
 
   const handleClickOutSide = () => {
     setShowResult(false);
@@ -50,7 +50,7 @@ const Search = () => {
       <Tippy
         placement="bottom"
         interactive
-        visible={value && showResult && searchCourses.length > 0}
+        visible={value && showResult && searchCourses?.length > 0}
         onClickOutside={handleClickOutSide}
         render={(attrs) => (
           <div

@@ -103,8 +103,13 @@
     width: 100%;
   }
 
+  .header-search {
+    max-width: 600px;
+    margin-top: -5px;
+  }
+
   .header-search .wrapper {
-    width: 100%;
+    width: 100vw;
   }
 
   .banner__content {
@@ -308,5 +313,10 @@
     .cart-delete-btn {
       width: 100%;
     }
+  }
+
+  // react-confirm-alert
+  .react-confirm-alert-body {
+    width: 100%;
   }
 }

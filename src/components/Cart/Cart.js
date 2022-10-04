@@ -141,9 +141,6 @@ const Cart = () => {
           const registerCourses = courseId.map((course) => {
             return { maKhoaHoc: course, taiKhoan: user.taiKhoan };
           });
-          // const register = registerCourses.map((course) => {
-          //   return handleRegisterCourse(course);
-          // });
 
           try {
             await axios.all(

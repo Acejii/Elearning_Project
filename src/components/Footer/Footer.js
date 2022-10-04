@@ -62,7 +62,7 @@ const Footer = () => {
               <div className="icon">
                 <AiOutlineMail />
               </div>
-              <div className="content">hoangthu7331@gmail</div>
+              <div className="content">hoangthu7331@gmail.com</div>
             </a>
             <a href="tel:+84976480450" className="item">
               <div className="icon">

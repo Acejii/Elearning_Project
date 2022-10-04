@@ -29,7 +29,7 @@ const CourseForm = ({ course }) => {
     { isManual: true }
   );
 
-  const { data: handleUpdateCourse, isLoading: updateLoading } = useRequest(
+  const { data: handleUpdateCourse } = useRequest(
     (course) => courseAPI.updateCourse(course),
     { isManual: true }
   );
@@ -59,25 +59,23 @@ const CourseForm = ({ course }) => {
       hinhAnh: values.hinhAnh.name,
     };
 
-    console.log(newValues);
-
-    // if (!course) {
-    //   try {
-    //     await handleAddCourse(newValues);
-    //     toast.success(toastMessage("Tạo thành công"));
-    //     navigate("/admin/courses");
-    //   } catch (error) {
-    //     toast.error(toastMessage("Tạo thất bại", error));
-    //   }
-    // } else {
-    //   try {
-    //     await handleUpdateCourse(newValues);
-    //     toast.success(toastMessage("Cập nhật thành công"));
-    //     navigate("/admin/courses");
-    //   } catch (error) {
-    //     toast.error(toastMessage("Cập nhật thất bại", error));
-    //   }
-    // }
+    if (!course) {
+      try {
+        await handleAddCourse(newValues);
+        toast.success(toastMessage("Tạo thành công"));
+        navigate("/admin/courses");
+      } catch (error) {
+        toast.error(toastMessage("Tạo thất bại", error));
+      }
+    } else {
+      try {
+        await handleUpdateCourse(newValues);
+        toast.success(toastMessage("Cập nhật thành công"));
+        navigate("/admin/courses");
+      } catch (error) {
+        toast.error(toastMessage("Cập nhật thất bại", error));
+      }
+    }
   };
 
   const handleChangeImg = (evt) => {
@@ -131,7 +129,12 @@ const CourseForm = ({ course }) => {
             validateStatus={error ? "error" : ""}
             help={error?.message}
           >
-            <Input type="text" {...field} disabled={!!course} />
+            <Input
+              type="text"
+              {...field}
+              disabled={!!course}
+              spellCheck={false}
+            />
           </Form.Item>
         )}
       />
@@ -190,7 +193,7 @@ const CourseForm = ({ course }) => {
             validateStatus={error ? "error" : ""}
             help={error?.message}
           >
-            <Input type="text" {...field} />
+            <Input type="text" {...field} spellCheck={false} />
           </Form.Item>
         )}
       />
@@ -214,7 +217,7 @@ const CourseForm = ({ course }) => {
             validateStatus={error ? "error" : ""}
             help={error?.message}
           >
-            <Input type="text" {...field} />
+            <Input type="text" {...field} spellCheck={false} />
           </Form.Item>
         )}
       />
@@ -239,7 +242,7 @@ const CourseForm = ({ course }) => {
             validateStatus={error ? "error" : ""}
             help={error?.message}
           >
-            <Input type="text" {...field} disabled />
+            <Input type="text" {...field} disabled spellCheck={false} />
           </Form.Item>
         )}
       />
@@ -327,7 +330,7 @@ const CourseForm = ({ course }) => {
             validateStatus={error ? "error" : ""}
             help={error?.message}
           >
-            <TextArea {...field} rows={3} />
+            <TextArea {...field} rows={3} spellCheck={false} />
           </Form.Item>
         )}
       />

@@ -18,6 +18,7 @@ const AuthModal = ({ isLogin, setLogin }) => {
       width={450}
       style={{ top: 40 }}
       className="authModal"
+      zIndex={1003}
     >
       {isLogin ? (
         <Login setLogin={setLogin} />

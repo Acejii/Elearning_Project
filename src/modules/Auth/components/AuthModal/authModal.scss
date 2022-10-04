@@ -1,11 +1,13 @@
 .authModal {
+  z-index: 1003;
   .ant-modal-mask {
     background-color: rgba(0, 0, 0, 0.7) !important;
-    z-index: 1003;
+    z-index: 1003 !important;
   }
 
   .ant-modal-wrap {
     overflow: hidden !important;
+    z-index: 1004 !important;
   }
 
   .ant-modal-content {

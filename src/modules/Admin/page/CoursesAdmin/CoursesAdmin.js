@@ -149,15 +149,19 @@ const CoursesAdmin = () => {
 
   // delete course
   const handleRemove = (courseId) => {
-    confirm("Xoá phim", "Bạn có chắc chắn muốn xoá phim này", async () => {
-      try {
-        await courseAPI.removeCourse(courseId);
-        toast.success(toastMessage("Xoá thành công"));
-        onReload();
-      } catch (error) {
-        toast.error(toastMessage("Xoá thất bại", error));
+    confirm(
+      "Xoá khoá học",
+      "Bạn có chắc chắn muốn xoá khoá học này",
+      async () => {
+        try {
+          await courseAPI.removeCourse(courseId);
+          toast.success(toastMessage("Xoá thành công"));
+          onReload();
+        } catch (error) {
+          toast.error(toastMessage("Xoá thất bại", error));
+        }
       }
-    });
+    );
   };
 
   return (

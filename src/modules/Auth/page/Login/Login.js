@@ -69,6 +69,7 @@ const Login = ({ setLogin }) => {
                     placeholder="Tài khoản"
                     {...field}
                     id="inputRef"
+                    spellCheck={false}
                   />
                 </Form.Item>
               )}
@@ -94,6 +95,7 @@ const Login = ({ setLogin }) => {
                     type="password"
                     placeholder="Mật khẩu"
                     {...field}
+                    spellCheck={false}
                   />
                 </Form.Item>
               )}

@@ -78,7 +78,12 @@ const Register = ({ setLogin }) => {
                   validateStatus={error ? "error" : ""}
                   help={error?.message}
                 >
-                  <Input type="text" {...field} id="inputRef" />
+                  <Input
+                    type="text"
+                    {...field}
+                    id="inputRef"
+                    spellCheck={false}
+                  />
                 </Form.Item>
               )}
             />
@@ -107,7 +112,7 @@ const Register = ({ setLogin }) => {
                   validateStatus={error ? "error" : ""}
                   help={error?.message}
                 >
-                  <Input type="text" {...field} />
+                  <Input type="text" {...field} spellCheck={false} />
                 </Form.Item>
               )}
             />
@@ -158,7 +163,7 @@ const Register = ({ setLogin }) => {
                   validateStatus={error ? "error" : ""}
                   help={error?.message}
                 >
-                  <Input type="text" {...field} />
+                  <Input type="text" {...field} spellCheck={false} />
                 </Form.Item>
               )}
             />
@@ -183,7 +188,7 @@ const Register = ({ setLogin }) => {
                   validateStatus={error ? "error" : ""}
                   help={error?.message}
                 >
-                  <Input type="text" {...field} />
+                  <Input type="text" {...field} spellCheck={false} />
                 </Form.Item>
               )}
             />

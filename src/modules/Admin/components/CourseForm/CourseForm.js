@@ -347,7 +347,7 @@ const CourseForm = ({ course }) => {
           <div
             className="btn btn-secondary"
             style={{ padding: "8px", width: "100px", marginLeft: "10px" }}
-            onClick={() => navigate("/admin/users")}
+            onClick={() => navigate("/admin/courses")}
           >
             Huỷ
           </div>

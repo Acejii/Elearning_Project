@@ -11,6 +11,7 @@ import CoursesLayOut from "modules/Courses/Layout/CoursesLayOut";
 import CourseByCatgory from "modules/Courses/page/CourseByCatgory";
 import CourseDetail from "modules/CourseDetail/page/CourseDetail";
 import CheckUserRoute from "routes/CheckUserRoute";
+import Page404 from "modules/Page404";
 function App() {
   return (
     <>
@@ -37,6 +38,8 @@ function App() {
             <Route key={index} path={route.path} element={route.component} />
           ))}
         </Route>
+
+        <Route path="*" element={<Page404 />} />
       </Routes>
 
       {/* alert */}

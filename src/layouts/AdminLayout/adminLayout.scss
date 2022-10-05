@@ -101,5 +101,9 @@ $sidebar-width: 200px;
     cursor: pointer;
     font-weight: 600;
     margin-bottom: 5px;
+
+    &:hover {
+      color: $main-color;
+    }
   }
 }

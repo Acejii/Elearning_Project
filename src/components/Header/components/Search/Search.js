@@ -9,7 +9,7 @@ import Tippy from "@tippyjs/react/headless";
 
 import "./search.scss";
 
-const Search = ({ resInputRef }) => {
+const Search = ({ resInputRef, setOpen }) => {
   const inputRef = useRef(null);
 
   const [showResult, setShowResult] = useState(true);
@@ -59,7 +59,11 @@ const Search = ({ resInputRef }) => {
             {...attrs}
             style={{ margin: 0 }}
           >
-            <SearchContent searchCourses={searchCourses} setValue={setValue} />
+            <SearchContent
+              searchCourses={searchCourses}
+              setValue={setValue}
+              setOpen={setOpen}
+            />
           </div>
         )}
       >

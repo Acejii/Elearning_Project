@@ -15,11 +15,12 @@ const defaultImg = [
   defaultImg5,
 ];
 
-const SearchContent = ({ searchCourses, setValue }) => {
+const SearchContent = ({ searchCourses, setValue, setOpen }) => {
   const navigate = useNavigate();
   const handleSearchCourse = (course) => {
     navigate(`/courses/detail/${course?.maKhoaHoc}`, { state: course });
     setValue("");
+    setOpen(false);
   };
   return (
     <div className="header-search">

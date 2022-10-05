@@ -39,7 +39,7 @@ const MobileSearch = () => {
           <div className="back-icon" onClick={() => setOpen(false)}>
             <IoMdArrowRoundBack />
           </div>
-          <Search resInputRef={resInputRef} />
+          <Search resInputRef={resInputRef} setOpen={setOpen} />
         </div>
       </Drawer>
     </>
